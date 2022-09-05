@@ -448,7 +448,7 @@ func (s *DNS01Solver) getDNSPresentMemory(dnsName, keyAuth string) (dnsPresentMe
 
 	var memory dnsPresentMemory
 	for _, mem := range s.txtRecords[dnsName] {
-		if mem.rec.Value == keyAuth {
+		if strings.Trim(mem.rec.Value, "\"") == keyAuth {
 			memory = mem
 			break
 		}
