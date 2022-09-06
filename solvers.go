@@ -466,7 +466,7 @@ func (s *DNS01Solver) deleteDNSPresentMemory(dnsName, keyAuth string) {
 	defer s.txtRecordsMu.Unlock()
 
 	for i, mem := range s.txtRecords[dnsName] {
-		if mem.rec.Value == keyAuth {
+		if strings.Trim(mem.rec.Value, "\"") == keyAuth {
 			s.txtRecords[dnsName] = append(s.txtRecords[dnsName][:i], s.txtRecords[dnsName][i+1:]...)
 			return
 		}
